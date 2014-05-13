@@ -22,6 +22,7 @@ public class CommandManager {
 	
 	public void registerCommand(String cmd, Command command) {
 		command.setServer(server);
+		command.init();
 		commands.put(cmd, command);
 	}
 	
