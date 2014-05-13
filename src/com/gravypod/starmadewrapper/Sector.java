@@ -10,6 +10,27 @@ public class Sector {
 	
 	private final int x, y, z;
 	
+	/**
+	 * Generate a sector based on strings that represent numbers. All numbers are extracted by the <code>{@link Integer}.parseInt()</code> method
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @throws Exception - NumberFormatException if the integers cannot be formated. It is casted down to force the end user to catch the exception.
+	 */
+	public Sector(String x, String y, String z) throws Exception {
+		int xPos, yPos, zPos;
+		try {
+			xPos = Integer.parseInt(x);
+			yPos = Integer.parseInt(y);
+			zPos = Integer.parseInt(z);
+		} catch (NumberFormatException e) {
+			throw e;
+		}
+		this.x = xPos;
+		this.y = yPos;
+		this.z = zPos;
+	}
+	
 	public Sector(int x, int y, int z) {
 	
 		this.x = x;

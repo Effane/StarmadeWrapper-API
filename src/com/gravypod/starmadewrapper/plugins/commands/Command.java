@@ -79,6 +79,23 @@ public abstract class Command {
 		tp(username, sector.getX(), sector.getY(), sector.getZ());
 	}
 	
+	protected boolean isAdmin(String username) {
+		
+		return getServer().getAdmins().contains(username);
+		
+	}
+	
+	protected boolean isAdmin(User user) {
+		return isAdmin(user.getUsername());
+	}
+	
+	protected boolean isDonor(String username) {
+		return getServer().getDonors().contains(username);
+	}
+	
+	protected boolean isDonor(User user) {
+		return isDonor(user.getUsername());
+	}
 	
 	public String getHelp() {
 	

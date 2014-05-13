@@ -19,6 +19,12 @@ public abstract class AdminCommand extends Command {
 		runAdmin(username, user, args);
 	}
 	
+	/**
+	 * A command that can only be executed by admins (As listed within the admins.txt file)
+	 * @param username -Username of the player
+	 * @param user - {@link User} object representing the player
+	 * @param args - Arguments from the command
+	 */
 	public abstract void runAdmin(final String username, User user, final String ... args);
 	
 }

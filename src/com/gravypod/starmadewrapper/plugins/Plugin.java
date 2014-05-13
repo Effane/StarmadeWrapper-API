@@ -64,6 +64,11 @@ public abstract class Plugin {
     
 	    return mainClass;
     }
+    
+    /**
+     * Get a directory within the "plugins" folder dedicated to your plugin
+     * @return
+     */
 	public File getDataDir() {
 		File dataDir = new File(getAssistant().getPluginManager().getDirectory(), getName());
 		if (!dataDir.exists()) {
