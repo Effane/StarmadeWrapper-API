@@ -83,4 +83,27 @@ public interface Server {
 	 */
 	public List<String> getDonors();
 	
+	/**
+	 * Stop the server and wrapper.
+	 */
+	public void stopServer();
+
+	/**
+	 * Restart the server
+	 * @param time - Time to append to the <code>/shutdown</code> command
+	 */
+	public void restart(int time);
+	
+	/**
+	 * Attempt to start the server, does nothing if it is already running.
+	 */
+	public void startServer();
+	
+	/**
+	 * Check if the server is running
+	 * @return - True if SM is started
+	 */
+	public boolean isRunning();
+	
+	
 }
