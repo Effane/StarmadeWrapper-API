@@ -70,7 +70,6 @@ public interface Server {
 	 */
 	public CommandManager getCommandManager();
 	
-	
 	/**
 	 * Get the items within the "admins.txt" file.
 	 * @return
@@ -82,6 +81,18 @@ public interface Server {
 	 * @return
 	 */
 	public List<String> getDonors();
+
+    /**
+     * Get the maximum amount of clients that can connect to the server.
+     * @return
+     */
+    public int getMaxClients();
+
+    /**
+     * Set the maximum amount of clients that can connect to the server.
+     * @param clients
+     */
+    public void setMaxClients(int clients);
 	
 	/**
 	 * Stop the server and wrapper.
