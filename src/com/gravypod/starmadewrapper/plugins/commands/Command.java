@@ -168,6 +168,16 @@ public abstract class Command {
         ban(user);
     }
 
+    /**
+     * Set the god mode status for a user
+     * @param user - username of player
+     * @param enabled
+     */
+    protected void setGodMode(final String user, final boolean enabled) {
+
+        setGodMode(user, enabled);
+    }
+
 	/**
 	 * Check to see if the user is inside the admin.txt
 	 * @param username
