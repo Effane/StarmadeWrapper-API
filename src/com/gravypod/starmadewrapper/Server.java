@@ -63,6 +63,12 @@ public interface Server {
 	 * @param message
 	 */
 	public void pm(String username, String message);
+
+    /**
+     * Ban the user with a given name
+     * @param user
+     */
+    public void ban(String user);
 	
 	/**
 	 * Get the {@link CommandManager} object
@@ -89,10 +95,34 @@ public interface Server {
     public int getMaxClients();
 
     /**
-     * Set the maximum amount of clients that can connect to the server.
-     * @param clients
+     * Get the ship thrust speed limit.
+     * @return
      */
-    public void setMaxClients(int clients);
+    public int getThrustSpeedLimit();
+
+    /**
+     * Get the amount of money a user starts with.
+     * @return
+     */
+    public int getStartingCredits();
+
+    /**
+     * Get the duration of each day for the universe in milliseconds.
+     * @return
+     */
+    public long getUniverseDay();
+
+    /**
+     * Does the server have a whitelist.
+     * @return
+     */
+    public boolean hasWhitelist();
+
+    /**
+     * Does the server have enemy spawning enabled.
+     * @return
+     */
+    public boolean hasEnemySpawning();
 	
 	/**
 	 * Stop the server and wrapper.

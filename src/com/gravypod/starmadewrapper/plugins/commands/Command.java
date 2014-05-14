@@ -158,7 +158,16 @@ public abstract class Command {
 	protected void tp(final String username, Sector sector) {
 		tp(username, sector.getX(), sector.getY(), sector.getZ());
 	}
-	
+
+    /**
+     * Ban a user from the server
+     * @param user - username of player
+     */
+    protected void ban(final String user) {
+
+        ban(user);
+    }
+
 	/**
 	 * Check to see if the user is inside the admin.txt
 	 * @param username
