@@ -45,6 +45,45 @@ public abstract class Command {
 	}
 	
 	/**
+	 * Give a user credits
+	 * @param user - User to get the credits
+	 * @param ammount - Amount of the credits
+	 */
+	protected void giveCredits(User user, int ammount) {
+		giveCredits(user.getUsername(), ammount);
+	}
+	
+	/**
+	 * Give a user credits
+	 * @param username - User to get the credits
+	 * @param ammount - Amount of the credits
+	 */
+	protected void giveCredits(String username, int ammount) {
+		exec("/give_credits " + username + " " + ammount);
+	}
+	
+	
+	/**
+	 * Give a user items
+	 * @param user - User to get the items
+	 * @param id - ID of the item
+	 * @param ammount - Amount of the items
+	 */
+	protected void give(User user, int id, int ammount) {
+		give(user.getUsername(), id, ammount);
+	}
+	
+	/**
+	 * Give a user items
+	 * @param username - User to get the items
+	 * @param id - ID of the item
+	 * @param ammount - Amount of the items
+	 */
+	protected void give(String username, int id, int ammount) {
+		exec("/giveid " + username + " " + id + " " + ammount);
+	}
+	
+	/**
 	 * Send a user a set of pms
 	 * @param user 
 	 * @param message
