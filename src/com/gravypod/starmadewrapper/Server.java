@@ -1,6 +1,7 @@
 package com.gravypod.starmadewrapper;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.gravypod.starmadewrapper.plugins.commands.CommandManager;
 
@@ -146,5 +147,10 @@ public interface Server {
 	 */
 	public boolean isRunning();
 	
+	/**
+	 * Get the logger instance for the server.
+	 * @return
+	 */
+	public Logger getLogger();
 	
 }
