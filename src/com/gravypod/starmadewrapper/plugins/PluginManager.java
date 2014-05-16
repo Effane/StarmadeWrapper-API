@@ -245,4 +245,12 @@ public class PluginManager {
 	
 		return pluginFolder;
 	}
+
+	public void reloadPlugins() {
+		for (Plugin plugin : loadedPlugins.values()) {
+			
+			plugin.onDisable(server);
+			plugin.onEnable(server);
+		}
+	}
 }
