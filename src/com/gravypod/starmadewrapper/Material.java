@@ -398,7 +398,15 @@ public enum Material {
     public Class<? extends MaterialData> getData() {
         return ctor.getDeclaringClass();
     }
-
+    /**
+     * Attempts to get the Material with the given name
+     *
+     * @param name Name of the material to get
+     * @return Material if found, else null
+     */
+    public static Material getMaterial(final String name) {
+        return BY_NAME.get(name);
+    }
     /**
      * Attempts to get the Material with the given ID
      *
@@ -416,7 +424,7 @@ public enum Material {
     static {
         for (Material material : values()) {
         	
-        	if (byId.length < material.id) {
+        	if (byId.length <= material.id) {
         		byId = Arrays.copyOf(byId, material.id + 1); // Startup time for functionality? Meh, its k
         	}
         	
