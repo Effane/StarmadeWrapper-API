@@ -3,6 +3,7 @@ package com.gravypod.starmadewrapper;
 import com.gravypod.starmadewrapper.plugins.material.MaterialData;
 
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -414,8 +415,13 @@ public enum Material {
 
     static {
         for (Material material : values()) {
-            byId[material.id] = material;
-            BY_NAME.put(material.name(), material);
+        	
+        	if (byId.length < material.id) {
+        		byId = Arrays.copyOf(byId, material.id + 1); // Startup time for functionality? Meh, its k
+        	}
+        	
+        	byId[material.id] = material;
+        	BY_NAME.put(material.name(), material);
         }
     }
 }
