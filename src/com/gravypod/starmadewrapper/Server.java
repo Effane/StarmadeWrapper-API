@@ -124,6 +124,24 @@ public interface Server {
      * @return
      */
     public boolean hasEnemySpawning();
+
+    /**
+     * Does the server use StarMade auth for players
+     * @return true if the server has it enabled
+     */
+    public boolean useStarMadeAuth();
+
+    /**
+     * Sets the whitelist on or off
+     * @param whitelist - true if whitelist is on, otherwise false
+     */
+    public void setWhitelist(boolean whitelist);
+
+    /**
+     * Add a player to the server's whitelist
+     * @param username of the player to whitelist
+     */
+    public void whitelist(String username);
 	
 	/**
 	 * Stop the server and wrapper.

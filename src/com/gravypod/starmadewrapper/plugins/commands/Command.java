@@ -254,6 +254,22 @@ public abstract class Command {
 	protected boolean isDonor(User user) {
 		return isDonor(user.getUsername());
 	}
+
+    /**
+     * Sets the whitelist on or off
+     * @param whitelist - true if whitelist is on, otherwise false
+     */
+    protected void setWhitelist(boolean whitelist) {
+        getServer().setWhitelist(whitelist);
+    }
+
+    /**
+     * Add a player to the server's whitelist
+     * @param username of the player to whitelist
+     */
+    public void whitelist(String username) {
+        getServer().whitelist(username);
+    }
 	
 	/**
 	 * Get help info on how to use this command.
