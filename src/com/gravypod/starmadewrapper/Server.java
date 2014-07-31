@@ -1,6 +1,8 @@
 package com.gravypod.starmadewrapper;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Logger;
 
 import com.gravypod.starmadewrapper.plugins.commands.CommandManager;
@@ -170,5 +172,21 @@ public interface Server {
 	 * @return
 	 */
 	public Logger getLogger();
+	
+	/**
+	 * Get a shared {@link ExecutorService} that can be used for any task. 
+	 * Everything in the pool is stopped when the starmade server stops.
+	 * This is a safe way to make sure you are not leaving behind threads.
+	 * @return
+	 */
+	public ExecutorService getThreadPool();
+	
+	/**
+	 * Get a shared {@link ScheduledExecutorService} that can be used for any task. 
+	 * Everything in the pool is stopped when the starmade server stops.
+	 * This is a safe way to make sure you are not leaving behind threads.
+	 * @return
+	 */
+	public ScheduledExecutorService getSchedulerPool();
 	
 }
