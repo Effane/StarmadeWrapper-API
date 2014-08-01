@@ -2,10 +2,13 @@ package com.gravypod.starmadewrapper.plugins;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
@@ -37,6 +40,7 @@ public class PluginManager {
 	
 	/** Loaded {@link Plugin} {@link HashMap}. */
 	private final HashMap<String, Plugin> loadedPlugins = new HashMap<String, Plugin>();
+	private final HashMap<File, Properties> pluginPropCach = new HashMap<File, Properties>();
 	
 	/** Main {@link EventManager} */
 	private final EventManager eventManager = new EventManager();
@@ -46,6 +50,7 @@ public class PluginManager {
 	
 	private final File pluginFolder;
 	private final GravyModClassLoader classLoader = new GravyModClassLoader(new URL[0], getClass().getClassLoader());
+	
 	/**
 	 * Create a new {@link PluginManager}
 	 * 
@@ -71,7 +76,6 @@ public class PluginManager {
 	 */
 	public void loadPlugins() {
 	
-		
 		if (!pluginFolder.exists()) {
 			pluginFolder.mkdir();
 			return;
@@ -88,10 +92,31 @@ public class PluginManager {
 			
 		});
 		
-		for (File plugin : pluginFiles) {
+		Arrays.sort(pluginFiles, new Comparator<File>() {
 			
-			loadPluginFile(plugin);
-			
+			@Override
+			public int compare(File plugin1, File plugin2) {
+				Properties p1, p2;
+				try {
+					p1 = getPluginProp(plugin1);
+					p2 = getPluginProp(plugin2);
+				} catch (IOException e) {
+					e.printStackTrace();
+					return 0;
+				}
+				
+				if (p1.containsKey("depends")) {
+					return p1.getProperty("depends").contains(p2.getProperty("name")) ? 1 : -1;
+				} else if (p2.containsKey("depends")) {
+					return p2.getProperty("depends").contains(p1.getProperty("name")) ? 1 : -1;
+				} else {
+					return p1.getProperty("name").compareTo(p2.getProperty("name"));
+				}
+			}
+		});
+		
+		for (File f : pluginFiles) {
+			loadPluginFile(f);
 		}
 		
 	}
@@ -107,26 +132,18 @@ public class PluginManager {
 	
 		try {
 			
-			JarFile jarFile = new JarFile(jar);
-			
-			JarEntry jarEntry = jarFile.getJarEntry("plugin.prop");
-			
-			InputStream is = jarFile.getInputStream(jarEntry);
-			
-			Properties prop = new Properties();
+			Properties prop = getPluginProp(jar);
 			
 			URL url = jar.toURI().toURL();
-			
-			prop.load(is);
 			
 			String main = prop.getProperty("main");
 			
 			String name = prop.getProperty("name");
 			
-			if (main == "" || name == "") {
-				jarFile.close();
+			if (main.isEmpty() || name.isEmpty()) {
 				throw new Exception("Your plugin did not contain a name or a main in plugin.prop");
 			}
+			
 			classLoader.addURL(url);
 			Class<?> jarClass = Class.forName(main, true, classLoader);
 			
@@ -141,14 +158,36 @@ public class PluginManager {
 			result.onEnable(server);
 			
 			loadedPlugins.put(name, result);
-
-			jarFile.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info(e.getStackTrace().toString());
 		}
+	}
+	
+	private Properties getPluginProp(File f) throws IOException {
+	
+		Properties prop = pluginPropCach.get(f);
 		
+		if (prop != null) {
+			return prop;
+		}
+		
+		JarFile jarFile = new JarFile(f);
+		
+		JarEntry jarEntry = jarFile.getJarEntry("plugin.prop");
+		
+		InputStream is = jarFile.getInputStream(jarEntry);
+		
+		prop = new Properties();
+		
+		prop.load(is);
+		
+		jarFile.close();
+		
+		pluginPropCach.put(f, prop);
+		
+		return prop;
 	}
 	
 	/**
@@ -232,19 +271,21 @@ public class PluginManager {
 	
 	/**
 	 * Get the command manager to register commands to.
+	 * 
 	 * @return
 	 */
 	public CommandManager getCommandManager() {
 	
 		return commandManager;
 	}
-
+	
 	public File getDirectory() {
 	
 		return pluginFolder;
 	}
-
+	
 	public void reloadPlugins() {
+	
 		for (Plugin plugin : loadedPlugins.values()) {
 			
 			plugin.onDisable(server);
