@@ -1,5 +1,6 @@
 package com.gravypod.starmadewrapper;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
@@ -188,5 +189,11 @@ public interface Server {
 	 * @return
 	 */
 	public ScheduledExecutorService getSchedulerPool();
+
+	/**
+	 * Get the directory starmade is in
+	 * @return
+	 */
+	public File getStarmadeDirectory();
 	
 }

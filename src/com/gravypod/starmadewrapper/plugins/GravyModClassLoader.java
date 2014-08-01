@@ -44,10 +44,6 @@ public class GravyModClassLoader extends URLClassLoader {
 	
 	protected Class<?> findClass(String name, boolean checkGlobal) throws ClassNotFoundException {
 	
-		if (name.startsWith("net.minecraft.")) {
-			throw new ClassNotFoundException(name);
-		}
-		
 		Class<?> result = classes.get(name);
 		
 		if (result == null) {

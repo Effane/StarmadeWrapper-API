@@ -45,7 +45,7 @@ public class PluginManager {
 	private final PluginAssistant assistant;
 	
 	private final File pluginFolder;
-	
+	private final GravyModClassLoader classLoader = new GravyModClassLoader(new URL[0], getClass().getClassLoader());
 	/**
 	 * Create a new {@link PluginManager}
 	 * 
@@ -115,9 +115,7 @@ public class PluginManager {
 			
 			Properties prop = new Properties();
 			
-			URL[] urls = new URL[1];
-			
-			urls[0] = jar.toURI().toURL();
+			URL url = jar.toURI().toURL();
 			
 			prop.load(is);
 			
@@ -129,8 +127,8 @@ public class PluginManager {
 				jarFile.close();
 				throw new Exception("Your plugin did not contain a name or a main in plugin.prop");
 			}
-			
-			Class<?> jarClass = Class.forName(main, true, new GravyModClassLoader(urls, getClass().getClassLoader()));
+			classLoader.addURL(url);
+			Class<?> jarClass = Class.forName(main, true, classLoader);
 			
 			Class<? extends Plugin> plugin = jarClass.asSubclass(Plugin.class);
 			
