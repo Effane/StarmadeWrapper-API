@@ -21,6 +21,22 @@ public class LocationUtils {
 		return x + " " + y + " " + z;
 	}
 
+	public static Sector sectorFromCommaString(String line) {
+		
+		String[] parts = line.split(",");
+		if (parts.length != 3) {
+			return null;
+		}
+		
+		try {
+			return new Sector(parts[0].trim(), parts[1].trim(), parts[2].trim());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
     /**
      * Parse a Sector from String.
      *

@@ -7,7 +7,7 @@ public abstract class AdminCommand extends Command {
 	@Override
 	public boolean canUseCommand(final String user) {
 	
-		return getServer().getAdmins().contains(user);
+		return getServer().isAdmin(user);
 	}
 	@Override
 	public void run(String username, User user, String... args) {

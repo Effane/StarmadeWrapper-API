@@ -70,6 +70,11 @@ public class PluginManager {
 		
 	}
 	
+	public PluginManager(Server server, CommandManager commandManager) {
+		this(server.getLogger(), server, commandManager);
+	}
+	
+	
 	/**
 	 * Load all of the .jar files in ./plugins/ into {@link Plugin} objects
 	 * This also runs onEnabled() and init()

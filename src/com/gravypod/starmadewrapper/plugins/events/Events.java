@@ -8,19 +8,11 @@ package com.gravypod.starmadewrapper.plugins.events;
 public class Events {
 	
 	/** {@link EventManager} passed on <code>init()</code> */
-	public static EventManager em;
+	private static EventManager em;
 	
 	/** Lock so only one event can be fired at a time */
 	private static Object lock = new Object();
 	
-	/**
-	 * Ran when the {@link EventManager} first loads
-	 * @param em - {@link EventManager} instance 
-	 */
-	public static void init(EventManager em) {
-	
-		Events.em = em;
-	}
 	
 	/**
 	 * Called by event code to fire/broadcast an event to everyone
@@ -37,6 +29,10 @@ public class Events {
 			
 		}
 		
+	}
+
+	public static void init(EventManager eventManager) {
+		em = eventManager;
 	}
 	
 }

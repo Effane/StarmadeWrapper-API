@@ -1,7 +1,6 @@
 package com.gravypod.starmadewrapper;
 
 import java.io.File;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Logger;
@@ -84,13 +83,13 @@ public interface Server {
 	 * Get the items within the "admins.txt" file.
 	 * @return
 	 */
-	public List<String> getAdmins();
+	public boolean isAdmin(String username);
 	
 	/**
 	 * Get the items within the "donors.txt" file.
 	 * @return
 	 */
-	public List<String> getDonors();
+	public boolean isDonor(String username);
 
     /**
      * Get the maximum amount of clients that can connect to the server.

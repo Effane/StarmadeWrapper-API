@@ -7,7 +7,7 @@ public abstract class DonorCommand extends Command {
 	@Override
 	public boolean canUseCommand(final String user) {
 	
-		return getServer().getDonors().contains(user) || getServer().getAdmins().contains(user);
+		return getServer().isDonor(user) || getServer().isAdmin(user);
 	}
 	@Override
 	public void run(String username, User user, String... args) {

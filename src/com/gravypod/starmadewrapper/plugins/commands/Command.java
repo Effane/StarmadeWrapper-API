@@ -224,7 +224,7 @@ public abstract class Command {
 	 */
 	protected boolean isAdmin(String username) {
 		
-		return getServer().getAdmins().contains(username);
+		return getServer().isAdmin(username);
 		
 	}
 	
@@ -243,7 +243,7 @@ public abstract class Command {
 	 * @return
 	 */
 	protected boolean isDonor(String username) {
-		return getServer().getDonors().contains(username);
+		return getServer().isDonor(username);
 	}
 
 	/**

@@ -21,16 +21,6 @@ public class EventManager {
 	private final Object lock = new Object();
 	
 	/**
-	 * Start an {@link EventManager}
-	 * And initiate the {@link Events} class
-	 */
-	public EventManager() {
-		
-		Events.init(this);
-		
-	}
-	
-	/**
 	 * Fire an {@link Event} to all listening plugins
 	 * @param event - {@link Event} instance
 	 */
