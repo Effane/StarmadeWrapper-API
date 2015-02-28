@@ -15,6 +15,7 @@ public class ServerInfo {
 	private final String host;
 	private final int port;
 	
+	
 	public ServerInfo(String host, int port, Object[] returnValues, long roundTripTime) {
 	
 		this.host = host;

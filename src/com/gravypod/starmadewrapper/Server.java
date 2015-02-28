@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Logger;
 
+import com.gravypod.starmadewrapper.config.ServerConfig;
 import com.gravypod.starmadewrapper.plugins.commands.CommandManager;
 
 /**
@@ -194,5 +195,12 @@ public interface Server {
 	 * @return
 	 */
 	public File getStarmadeDirectory();
+	
+	
+	/**
+	 * Get information from the starmade config.
+	 * @return
+	 */
+	public ServerConfig getServerConfig();
 	
 }
