@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class ServerInfo {
 	
-	private final Byte infoVersion;
-	private final Float version;
+	private final byte infoVersion;
+	private final float version;
 	private final String name;
 	private final String desc;
-	private final Long startTime;
-	private final Integer playerCount;
-	private final Integer maxPlayers;
+	private final long startTime;
+	private final int playerCount;
+	private final int maxPlayers;
 	private final long ping;
 	private final String host;
 	private final int port;
@@ -20,26 +20,26 @@ public class ServerInfo {
 	
 		this.host = host;
 		this.port = port;
-		this.infoVersion = ((Byte) returnValues[0]);
-		this.version = ((Float) returnValues[1]);
+		this.infoVersion = ((byte) returnValues[0]);
+		this.version = ((float) returnValues[1]);
 		this.name = ((String) returnValues[2]);
 		this.desc = ((String) returnValues[3]);
-		this.startTime = ((Long) returnValues[4]);
-		this.playerCount = ((Integer) returnValues[5]);
-		this.maxPlayers = ((Integer) returnValues[6]);
+		this.startTime = ((long) returnValues[4]);
+		this.playerCount = ((int) returnValues[5]);
+		this.maxPlayers = ((int) returnValues[6]);
 		this.ping = roundTripTime;
 	}
 	
 	public String toString() {
 	
 		StringBuilder sb = new StringBuilder();
-		sb.append("SERVER INFO FOR " + this.host + ":" + this.port + "(INFO VERSION: " + this.infoVersion + ")\n");
-		sb.append("Version: " + this.version + "\n");
-		sb.append("Name: " + this.name + "\n");
-		sb.append("Description: " + this.desc + "\n");
-		sb.append("Started: " + new Date(this.startTime.longValue()) + "\n");
-		sb.append("Players: " + this.playerCount + "/" + this.maxPlayers + "\n");
-		sb.append("Ping: " + this.ping + "\n");
+		sb.append("SERVER INFO FOR " + getHost() + ":" + getPort() + "(INFO VERSION: " + getInfoVersion() + ")\n");
+		sb.append("Version: " + getVersion() + "\n");
+		sb.append("Name: " + getName() + "\n");
+		sb.append("Description: " + getDesc() + "\n");
+		sb.append("Started: " + new Date(getStartTime()) + "\n");
+		sb.append("Players: " + getPlayerCount() + "/" + getMaxPlayers() + "\n");
+		sb.append("Ping: " + getPing() + "\n");
 		
 		return sb.toString();
 	}
